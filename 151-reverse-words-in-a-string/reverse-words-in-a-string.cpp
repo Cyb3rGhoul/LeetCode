@@ -1,39 +1,35 @@
 class Solution {
 public:
     string reverseWords(string s) {
-        int n = s.length();
+        string ans = "";
+        stack<string> res;
         int i = 0;
-        stack<string> st;
+        int n = s.length();
+        while(s[i]==' '){
+            i++;
+        }
+        while(s[n-1]==' '){
+            n--;
+        }
         string word = "";
-
-        while (i < n && s[i] == ' ') i++;
-
-        while (i < n) {
-            if (s[i] == ' ') {
-                if (!word.empty()) {
-                    st.push(word);
-                    word = "";
-                }
-
-                while (i < n && s[i] == ' ') i++;
-            } else {
-                word += s[i];  // Build word
+        while(i<n){
+            while(i<n && s[i]==' '){
                 i++;
             }
+            while(i<n && s[i]!=' '){
+                word += s[i];
+                i++;
+            }
+            res.push(word);
+            word = "";
+            i++;
         }
-
-        if (!word.empty()) {
-            st.push(word);
+        while(!res.empty()){
+            ans += res.top();
+            res.pop();
+            if(!res.empty()) ans += " ";
         }
-
-        // Construct reversed sentence
-        string ans = "";
-        while (!st.empty()) {
-            ans += st.top();
-            st.pop();
-            if (!st.empty()) ans += " "; // Add space between words
-        }
-
         return ans;
+        
     }
 };
