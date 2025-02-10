@@ -1,20 +1,20 @@
 class Solution {
 public:
     bool isSubsequence(string s, string t) {
-    int i = 0, j = 0;
-    
-    // Traverse both strings
-    while (i < s.length() && j < t.length()) {
-        // If characters match, move the pointer for `s`
-        if (s[i] == t[j]) {
-            i++;
+        int n = t.length();
+        int m = s.length();
+        int i = 0; 
+        int j = 0;
+        while(i<n){
+            if(s[j]==t[i]){
+                i++;
+                j++;
+            }
+            else{
+                i++;
+            }
         }
-        // Always move the pointer for `t`
-        j++;
+        if(j<m) return false;
+        return true;
     }
-    
-    // If all characters of `s` were found in `t` in order
-    return i == s.length();
-}
-
 };
