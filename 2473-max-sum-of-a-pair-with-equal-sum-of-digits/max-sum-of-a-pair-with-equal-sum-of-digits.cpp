@@ -13,10 +13,10 @@ public:
 
         int res = -1;
         
-        unordered_map<int,int> mp;
+        int mp[82];
         for(int i = 0; i<n; i++){
             int a = getSum(nums[i]);
-            if(mp.count(a)){
+            if(mp[a]>0){
                 res = max(res, nums[i]+mp[a]);
             }
             mp[a] = max(mp[a],nums[i]);
