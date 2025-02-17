@@ -1,16 +1,20 @@
 class RecentCounter {
 private:
-    vector<int> rec;
-    int start;
+   queue<int> requests;
 public:
 
-    RecentCounter() : start(0) {}
+    RecentCounter() {}
     
     int ping(int t) {
-        rec.push_back(t);
-        while(rec[start] < t-3000){
-            start++;
+        // Step 1: Add the new request's timestamp to the queue
+        requests.push(t);
+
+        // Step 2: Remove all requests older than t - 3000
+        while (!requests.empty() && requests.front() < t - 3000) {
+            requests.pop();
         }
-        return rec.size()-start;
+
+        // Step 3: The size of the queue is the number of recent requests
+        return requests.size();
     }
 };
