@@ -13,17 +13,30 @@
 class Solution {
 public:
     int pairSum(ListNode* head) {
-        deque<int> q;
-        while(head!=NULL){
-            q.push_back(head->val);
-            head = head->next;
+        ListNode* slow = head, *fast = head;
+        while (fast && fast->next) {
+            slow = slow->next;
+            fast = fast->next->next;
         }
-        int maxi = INT_MIN;
-        while(!q.empty()){
-            maxi = max(maxi,q.front()+q.back());
-            q.pop_front();
-            if(!q.empty()) q.pop_back();
+
+        // Step 2: Reverse the second half of the linked list
+        ListNode* prev = nullptr, *curr = slow, *next = nullptr;
+        while (curr) {
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
         }
-        return maxi;
+
+        // Step 3: Find the maximum twin sum
+        int maxSum = 0;
+        ListNode* first = head, *second = prev;
+        while (second) {  // second is the reversed half
+            maxSum = max(maxSum, first->val + second->val);
+            first = first->next;
+            second = second->next;
+        }
+
+        return maxSum;
     }
 };
