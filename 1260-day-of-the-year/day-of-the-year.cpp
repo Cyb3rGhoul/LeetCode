@@ -1,32 +1,29 @@
 class Solution {
 public:
     int dayOfYear(string date) {
-        string y = date.substr(0, 4);  // Extract "YYYY"
-        string m = date.substr(5, 2);  // Extract "MM"
-        string d = date.substr(8, 2);  // Extract "DD"
-
-        int year = stoi(y);
-        int month = stoi(m);
-        int day = stoi(d);
+    string y = date.substr(0, 4); // Extract "YYYY"
+    string m = date.substr(5, 2); // Extract "MM"
+    string d = date.substr(8, 2); // Extract "DD"
     
-        int res = 0;
-
-        if(month==1) return day;
-        res += 31;
-
-        for(int i = 2; i<month; i++){
-            if(i == 3 || i == 5 || i==7 || i==8 || i == 10 || i == 12){
-                res += 31;
-            }
-            else if(i==2 && (year%4==0 || year%100==0) && year != 1900){
-                res += 29;
-            }else if(i==2 && (year%4!=0 || year==1900)){
-                res+=28;
-            }else{
-                res+=30;
-            }
-        }
-        return res + day;
-
+    int year = stoi(y);
+    int month = stoi(m);
+    int day = stoi(d);
+    
+    // Array to store days in each month
+    int daysInMonth[] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    
+    // Check if it's a leap year and update February
+    bool isLeapYear = (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0));
+    if (isLeapYear)
+        daysInMonth[2] = 29;
+    
+    int dayCount = day;
+    
+    // Add days from previous months
+    for (int i = 1; i < month; i++) {
+        dayCount += daysInMonth[i];
     }
+    
+    return dayCount;
+}
 };
