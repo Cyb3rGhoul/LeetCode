@@ -1,27 +1,32 @@
 class SmallestInfiniteSet {
 public:
-    vector<bool> nums;
-    int i;
+    int currEle;
+    unordered_set<int> st;
+    priority_queue<int,vector<int>, greater<int>> pq;
+
     SmallestInfiniteSet() {
-        i = 1;
-        nums = vector<bool>(1000,true);
+        currEle = 1;
     }
     
     int popSmallest() {
-        int res = i;
-        nums[i] = false;
-        for(int j = i+1; j<1001; j++){
-            if(nums[j] == true){
-                i = j;
-                break;
-            }
+        int res;
+        if(!pq.empty()){
+            res = pq.top();
+            pq.pop();
+            st.erase(res);
+        }else{
+            res = currEle;
+            currEle += 1;
         }
         return res;
     }
     
     void addBack(int num) {
-        nums[num] = true;
-        if(num<i) i = num;
+        if(num>=currEle || st.find(num) != st.end()){
+            return;
+        }
+        st.insert(num);
+        pq.push(num);
     }
 };
 
