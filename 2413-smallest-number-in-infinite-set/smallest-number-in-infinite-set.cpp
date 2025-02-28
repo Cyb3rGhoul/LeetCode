@@ -1,8 +1,7 @@
 class SmallestInfiniteSet {
 public:
     int currEle;
-    unordered_set<int> st;
-    priority_queue<int,vector<int>, greater<int>> pq;
+    set<int> st;
 
     SmallestInfiniteSet() {
         currEle = 1;
@@ -10,10 +9,9 @@ public:
     
     int popSmallest() {
         int res;
-        if(!pq.empty()){
-            res = pq.top();
-            pq.pop();
-            st.erase(res);
+        if(!st.empty()){
+            res = *st.begin(); 
+            st.erase(st.begin());
         }else{
             res = currEle;
             currEle += 1;
@@ -26,7 +24,6 @@ public:
             return;
         }
         st.insert(num);
-        pq.push(num);
     }
 };
 
