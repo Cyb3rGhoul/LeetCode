@@ -4,16 +4,13 @@ public:
         int n = nums1.size();
         int m = nums2.size();
         vector<vector<int>> res;
-        vector<int> small;
         int i = 0;
         int j = 0;
         while(i<n && j<m){
             int a = nums1[i][0];
             int b = nums2[j][0];
             if(a == b){
-                small.push_back(a);
-                small.push_back(nums1[i][1]+nums2[j][1]);
-                res.push_back(small);
+                res.push_back({a,nums1[i][1]+nums2[j][1]});
                 i++;
                 j++;
             }
@@ -24,7 +21,6 @@ public:
                 res.push_back(nums2[j]);
                 j++;
             }
-            small.clear();
         }
         while(i<n){
             res.push_back(nums1[i]);
