@@ -1,3 +1,9 @@
+// isme patter to pata nahi kya hai par bas approach mai itan samjh aa raha hai ki compariosin ho ra hai from the extreme elements like back or front
+
+//usko dekh kar stack ka implementation aa sakta hai par string ka bhi kafi sare stl hai esse to humne ussi se kaam chala liya
+
+
+
 class Solution {
 public:
     string robotWithString(string s) {
@@ -19,12 +25,14 @@ public:
             t.push_back(s[i]); // t mai to dalna hai no matter what
             char minCh = (i+1<n) ? ch[i+1] : s[i]; //minchar dekho  
 
-            while(!t.empty() && t.back() <= minCh){ // agar
+            while(!t.empty() && t.back() <= minCh){ // t ko pop back karo jab tak uska piche wala is smaller than minChar
                 paper+=t.back();
                 t.pop_back();
             }
             i++;
         }
+
+        //t mai agar kuch baccha jaye to usko bhi add kardo
 
         while(!t.empty()){
             paper.push_back(t.back());
