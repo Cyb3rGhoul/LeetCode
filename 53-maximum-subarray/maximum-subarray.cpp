@@ -4,9 +4,9 @@ public:
         int maxi = INT_MIN;
         int sum = 0;
         for(int i = 0; i<nums.size(); i++){
-            sum += nums[i];
-            maxi = max(sum,maxi);
-            if(sum<0) sum = 0;
+            sum += nums[i]; // nums ko add karo
+            maxi = max(sum,maxi); // maxi ko update karo
+            if(sum<0) sum = 0; // agar sum less ko to usko update karne ki zarurat
         }
 
         return maxi;
