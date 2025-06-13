@@ -9,6 +9,8 @@ public:
 
         // to find this we will get n and then c and then we will use res and then with the help of a loop we will find ncr
 
+        // 10 C 3 = (8 * 9 * 10) / 1 * 2 * 3 
+
         int N = n+m-2;
         int r = n-1;
         double res = 1;
