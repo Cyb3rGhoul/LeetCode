@@ -2,10 +2,9 @@ class Solution {
 public:
     int lengthOfLongestSubstring(string s) {
         //ek approach soch ra hu ki map mai dal dunga jesse hi repeat ho to ek minus kar  dunga
-        //agar zero ho jayega to element nikal dunga and size map ka size rakh lunga
+        //agar zero ho jayega to element nikal dunga
 
-        //nahi ye work nahi karegi
-
+    
         //two pointer sliding window
 
         int n = s.length();
