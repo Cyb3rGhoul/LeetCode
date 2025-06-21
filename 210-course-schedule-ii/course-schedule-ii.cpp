@@ -1,49 +1,58 @@
 class Solution {
 public:
-    vector<int> solve(int n, unordered_map<int,vector<int>>& adj, vector<int>& ind){
-        queue<int> q;
-        vector<int> res;
+    //dfs mari hai simple
+    bool hasCycle;
+    void dfs(unordered_map<int,vector<int>>& adj, int u, vector<bool>& vis, stack<int>& st, vector<bool>& inR){
+        vis[u] = true;
+        inR[u] = true;
 
-        for(int i = 0; i<n; i++){
-            if(ind[i]==0){
-                res.push_back(i);
-                q.push(i);
+        for(int &v: adj[u]){
+            if(inR[v]==true){
+                hasCycle = true;
+                return;
+            }
+            if(!vis[v]){
+                dfs(adj,v,vis,st,inR);
             }
         }
 
-        while(!q.empty()){
-            int u = q.front();
-            q.pop();
-
-            for(int &v: adj[u]){
-                ind[v]--;
-                if(ind[v]==0){
-                    res.push_back(v);
-                    q.push(v);
-                }
-            }
-        }
-
-        if(res.size()==n) return res;
-        return {};
+        st.push(u);
+        inR[u] = false;
     }
 
 
 
     vector<int> findOrder(int numCourses, vector<vector<int>>& prerequisites) {
         unordered_map<int,vector<int>> adj;
-        vector<int> ind(numCourses,0);
+        vector<bool> vis(numCourses,false);
+        vector<bool> inR(numCourses,false);
+
         for(auto &vec: prerequisites){
             int a = vec[0];
             int b = vec[1];
 
             adj[b].push_back(a);
 
-            ind[a]++;
+        }
+        
+
+        stack<int> st;
+
+        for(int i = 0; i<numCourses; i++){
+            if(!vis[i]){
+                dfs(adj,i,vis,st,inR);
+            }
         }
 
-        // vector<int> res;
-        return solve(numCourses,adj,ind);
-        // return res;
+        if(hasCycle==true){
+            return {};
+        }
+        vector<int> res;
+        while(!st.empty()){
+            res.push_back(st.top());
+            st.pop();   
+        }
+
+        return res;
     }
 };
