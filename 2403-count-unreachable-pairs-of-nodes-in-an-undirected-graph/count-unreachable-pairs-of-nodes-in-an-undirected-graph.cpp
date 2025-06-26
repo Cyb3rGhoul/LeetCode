@@ -44,12 +44,17 @@ public:
         }
 
         unordered_map<int,int> mp;
+        
+        
         //step -3 (map bana lo)
         for(int i =0; i<n; i++){
             int papa = find(i);
             mp[papa]++;
         }
 
+        // formula hai fir aab wo to nikala padega meri jaan
+        // size*(remainingNodes - size) --> issase hume sare components ke connection mil jayenge
+        // repeat bhi nahi hoga kyuki remainingNode se hum ek ek karke minus bhi kar re hai
         long long res = 0;
         long long remNodes = n;
 
