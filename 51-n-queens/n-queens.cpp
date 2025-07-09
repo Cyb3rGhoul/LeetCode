@@ -2,39 +2,31 @@ class Solution {
 public:
     vector<vector<string>> res;
     int N;
+    unordered_set<int> cols;
+    unordered_set<int> diag;
+    unordered_set<int> antidiag;
 
-    bool isVal(vector<string>& board, int row, int col){
-        //look upward
-        for(int i = row-1; i>=0; i--){
-            if(board[i][col]=='Q'){
-                return false;
-            }
-        }
-
-        //look leftDiagonal
-        for(int i = row-1, j = col-1; i>=0 && j>=0; i--,j-- ){
-            if(board[i][j]=='Q') return false;
-        }
-
-        //look rightDiagonal
-        for(int i = row-1, j = col+1; i>=0 && j<N; i-- ,j++ ){
-            if(board[i][j]=='Q') return false;
-        }
-
-        return true;
-    }
     void solve(vector<string>& board, int row){
         if(row>=N){
             res.push_back(board);
         }
         for(int col = 0; col < N; col++){
-            if(isVal(board,row,col)){
+                int dia = row+col;
+                int antidia = row-col;
+                if(cols.find(col)!=cols.end() || diag.find(dia)!=diag.end() || antidiag.find(antidia) != antidiag.end()) continue;
+
                 board[row][col] = 'Q';
+                cols.insert(col);
+                diag.insert(dia);
+                antidiag.insert(antidia);
 
                 solve(board,row+1);
 
                 board[row][col] = '.';
-            }
+                cols.erase(col);
+                diag.erase(dia);
+                antidiag.erase(antidia);
+
         }
     }
     vector<vector<string>> solveNQueens(int n) {
