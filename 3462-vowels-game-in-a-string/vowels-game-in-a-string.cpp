@@ -7,8 +7,7 @@ public:
         int vowctn = 0;
 
         for(int i = 0; i<n; i++){
-            if(vow.find(s[i])!=string::npos){ vowctn++;
-            break;}
+            if(vow.find(s[i])!=string::npos){return true;}
         }
 
         if(vowctn>=1) return true;
