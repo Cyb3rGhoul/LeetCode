@@ -11,9 +11,6 @@ public:
             else freq[i] = freq[i-1];
         }
 
-        // for(int i : freq){
-        //     cout<<i<<endl;
-        // }
         if(freq[n-1]==0) return false;
         if(freq[n-1]==1||freq[n-1]%3==0||(freq[n-1]-1)%3==0||(freq[n-1]+1)%3==0) return true;
         return false;
