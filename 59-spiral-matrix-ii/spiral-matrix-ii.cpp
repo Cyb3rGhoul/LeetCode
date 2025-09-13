@@ -1,43 +1,31 @@
 class Solution {
 public:
     vector<vector<int>> generateMatrix(int n) {
-        vector<vector<int>> res(n,vector<int>(n,0));
-        int num = 1;
-        int ctn = 0;
-
-        int top = 0, bottom = n - 1, left = 0, right = n - 1;
-
-        // Iterate until all elements are stored
-        while (top <= bottom && left <= right) {
-
-            // store top row from left to right
-            for (int i = left; i <= right; ++i) {
-                res[top][i] = num++;
+        int t = 0, b = n-1, r = n-1, l = 0;
+        int ctn = 1;
+        vector<vector<int>> res(n,vector<int>(n));
+        while(t<=b && l<=r){
+            for(int i = l; i<=r; i++){
+                res[t][i] = ctn++;
             }
-            top++;
+            t++;
 
-            // store right column from top to bottom
-            for (int i = top; i <= bottom; ++i) {
-                res[i][right] = num++;
+            for(int i = t; i<=b; i++){
+                res[i][r] = ctn++;
             }
-            right--;
+            r--;
 
-            // store bottom row from right to left (if exists)
-            if (top <= bottom) {
-                for (int i = right; i >= left; --i) {
-                    res[bottom][i] = num++;
-                }
-                bottom--;
+            for(int i = r; i>=l; i--){
+                res[b][i] = ctn++;
             }
+            b--;
 
-            // store left column from bottom to top (if exists)
-            if (left <= right) {
-                for (int i = bottom; i >= top; --i) {
-                    res[i][left] = num++;
-                }
-                left++;
+            for(int i = b; i>=t; i--){
+                res[i][l] = ctn++;
             }
+            l++;
         }
+
         return res;
     }
 };
