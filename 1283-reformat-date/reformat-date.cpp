@@ -4,25 +4,24 @@ public:
         string d = "";
         int da = 0;
         string m = "";
-        int mo = 0;
         string y = "";
 
         string ans = "";
 
-        unordered_map<int,string> mp;
+        unordered_map<string,string> mp;
 
-        mp[1] = "Jan";
-        mp[2] = "Feb";
-        mp[3] = "Mar";
-        mp[4] = "Apr";
-        mp[5] = "May";
-        mp[6] = "Jun";
-        mp[7] = "Jul";
-        mp[8] = "Aug";
-        mp[9] = "Sep";
-        mp[10] = "Oct";
-        mp[11] = "Nov";
-        mp[12] = "Dec";
+        mp["01"] = "Jan";
+        mp["02"] = "Feb";
+        mp["03"] = "Mar";
+        mp["04"] = "Apr";
+        mp["05"] = "May";
+        mp["06"] = "Jun";
+        mp["07"] = "Jul";
+        mp["08"] = "Aug";
+        mp["09"] = "Sep";
+        mp["10"] = "Oct";
+        mp["11"] = "Nov";
+        mp["12"] = "Dec";
 
         int n = date.length(), i = 0;
         while(date[i]!=' '){
@@ -51,16 +50,9 @@ public:
 
         for(auto it: mp){
             if(it.second==m){
-                mo = it.first;
+                m = it.first;
                 break;
             }
-        }
-
-        if(mo<10){
-            m = "0" + to_string(mo);
-        }
-        else{
-            m = to_string(mo);
         }
 
         i++;
